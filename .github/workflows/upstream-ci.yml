@@ -1,7 +1,9 @@
 name: upstream-ci
 
 # Reproduces tester-army/e2e .github/workflows/spec.yml at
-# 292cd0597c57b4929ad53919f0e4fe40ad87e095 with allowed deviations A1–A3 only.
+# 292cd0597c57b4929ad53919f0e4fe40ad87e095 with allowed deviations A1–A3, plus
+# A4: pnpm/action-setup package_json_file: upstream/package.json so the root
+# Bun packageManager field does not break the upstream pnpm installer.
 
 on:
   pull_request:
@@ -29,6 +31,9 @@ jobs:
         with:
           submodules: true
       - uses: pnpm/action-setup@9fd676a19091d4595eefd76e4bd31c97133911f1 # v4.2.0
+        with:
+          # Nested upstream layout (same class as A2 cache-dependency-path).
+          package_json_file: upstream/package.json
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 26
@@ -79,6 +84,8 @@ jobs:
         with:
           submodules: true
       - uses: pnpm/action-setup@9fd676a19091d4595eefd76e4bd31c97133911f1 # v4.2.0
+        with:
+          package_json_file: upstream/package.json
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: ${{ matrix.node }}
@@ -110,6 +117,8 @@ jobs:
         with:
           submodules: true
       - uses: pnpm/action-setup@9fd676a19091d4595eefd76e4bd31c97133911f1 # v4.2.0
+        with:
+          package_json_file: upstream/package.json
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 26
