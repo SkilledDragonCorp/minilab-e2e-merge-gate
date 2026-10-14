@@ -1,0 +1,6 @@
+[test]
+# Lab tests only — upstream has its own pnpm/vitest suite under upstream-ci.
+root = "tests"
+
+[install]
+registry = "https://registry.npmjs.org/"

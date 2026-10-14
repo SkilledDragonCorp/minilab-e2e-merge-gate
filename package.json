@@ -1,0 +1,38 @@
+{
+  "name": "@skilleddragon/minilab-e2e-merge-gate",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "SkilledDragon minilab: fail-closed e2e merge gate for agent UI changes (Tester Army e2e)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "bun@1.4.2",
+  "bin": {
+    "e2e-merge-gate": "./src/cli.ts"
+  },
+  "scripts": {
+    "gate": "bun run src/cli.ts",
+    "build": "bun build src/cli.ts --outdir dist --target node --outfile dist/cli.js",
+    "test": "bun test tests",
+    "typecheck": "tsc --noEmit",
+    "lint": "bun x @biomejs/biome check .",
+    "lint:fix": "bun x @biomejs/biome check --write .",
+    "check:skills": "bun run scripts/check-skills.ts",
+    "check:banned": "bun run scripts/check-banned.ts",
+    "extract:upstream": "bun run scripts/extract-upstream-steps.ts",
+    "check:upstream-parity": "bun run scripts/check-upstream-parity.ts",
+    "upstream:local": "bash scripts/upstream-test.sh",
+    "audit": "bun audit --audit-level=high",
+    "browsers": "bun x @e2e-dev/web install chromium --with-deps"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@e2e-dev/web": "0.14.0",
+    "@types/bun": "latest",
+    "e2e": "0.20.0",
+    "typescript": "5.9.3",
+    "yaml": "2.8.2"
+  }
+}
